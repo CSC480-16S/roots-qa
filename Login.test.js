@@ -1,4 +1,6 @@
 var request = require('supertest');
+var req = require('request');
+
 var sinon = require('sinon');
 var assert = require('assert');
 //var should = require('should');
@@ -26,21 +28,46 @@ describe('Login Test with Correct Credentials', function() {
 
 describe('Login Test with Bad Credentials', function() {
          
-         it('should redirect to /userLogin', function (done) {
-            //login
-            
-            //assert(sent.calledWith('Wrong password'));
+         it('should remain at /userLogin', function (done) {
             
             request(sails.hooks.http.app)
             .post('/userLogin')
-            .send({ email: 'jmaccree@oswego.edu', password: 'passpass'}, function(){
-                  if(error) throw error;
-            })
+            .send({ email: 'jmaccree@oswego.edu', password: 'passpass'})
             
-            .expect(200, done)
+            .expect(200)
+            .end(function(err, res){
+                 if(res) throw res;
+                 done();
+                 })
             //.expect('location','/userLogin', done);
             
             });
          
          
          }).done;
+
+describe('userLogin', function(){
+         /*
+         var res = LoginController.userLogin({ email: 'jmaccree@oswego.edu', password: 'passpass'}, var whatever )
+         .then(function(res){
+               done()
+               })
+          
+         it('Checks the response of a bad login', function(done){
+            request(sails.hooks.http.app, function(done){console.log(done);})
+            .post('/userLogin')
+            .send({ email: 'jmaccree@oswego.edu', password: 'passpass'}, done)
+            
+            })
+         */
+         
+         });
+
+
+
+
+
+
+
+
+
